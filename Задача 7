@@ -1,0 +1,52 @@
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
+long long strange_multiply(int a, long long b)
+{
+	bool negative = false;
+
+	if(a > 0 && b < 0 || b > 0 && a < 0)
+	{
+		negative = true;
+	}
+
+	a = abs(a);
+	b = abs(b);
+
+
+	long long res = 0;
+
+	while (a > 0)
+	{
+		if(a % 2 == 1)
+		{
+			res = res + b;
+		}
+		b = b + b;
+		a /= 2;
+	}
+
+	if(negative)
+	{
+		return -res;
+	}
+	else
+	{
+		return res;
+	}
+}
+
+
+int main()
+{
+	long long a, b;
+
+	cin >> a >> b;
+
+
+	cout << strange_multiply(a, b);
+
+	return 0;
+}
