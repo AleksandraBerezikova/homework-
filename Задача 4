@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+void dig_trench(int n, int** v)
+{
+	for(int i = 0; i < n; ++i)
+	{
+		for(int j = 0; j < n; ++j)
+		{
+			if(i + j < n)
+			{
+				v[i][i + j] = j;
+			}
+			if(i - j >= 0)
+			{
+				v[i][i - j] = j;
+			}
+		}
+	}
+}
+
+
+int main()
+{
+	int n;
+	cin >> n;
+
+	int** Trench = new int*[n];
+	for(int i = 0; i < n; ++i)
+	{
+		Trench[i] = new int[n];
+	}
+
+
+
+	dig_trench(n, Trench);
+
+	for(int i = 0; i < n; ++i)
+	{
+		for(int j = 0; j < n; ++j)
+		{
+			cout << Trench[i][j] << " ";
+		}
+		cout << "\n";
+	}
+
+	return 0;
+}
