@@ -1,0 +1,93 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool is_prime(int n)
+{
+	if(n == 2 || n == 3)
+	{
+		return true;
+	}
+
+	if(n == 1 || n == 0)
+	{
+		return false;
+	}
+
+	for(int i = 2; i <= sqrt(n); ++i)
+	{
+		if(n % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+int delete_annoying_primes(int n, int* v)
+{
+	int* primes = new int[n];
+	int k = 0;
+
+	for(int i = 0; i < n; ++i)
+	{
+		if(is_prime(v[i]))
+		{
+			primes[k] = v[i];
+		}
+		k++;
+	}
+
+	int primes_size = k;
+	k = 0;
+
+
+	int* temp = new int[n];
+
+	for(int i = 0; i < n; ++i)
+	{
+		int num_of_matches = 0;
+		for(int j = 0; j < primes_size; ++j)
+		{
+			if(v[i] == primes[j])
+			{
+				num_of_matches++;
+			}
+		}
+		if(num_of_matches < 2)
+		{
+			temp[k] = v[i];
+			k++;
+		}
+	}
+
+	for(int i = 0; i < k; ++i)
+	{
+		v[i] = temp[i];
+	}
+
+	return k;
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+
+	int* Array = new int[n];
+	for(int i = 0; i < n; ++i)
+	{
+		cin >> Array[i];
+	}
+
+	int new_n = delete_annoying_primes(n, Array);
+
+	for (int i = 0; i < new_n; ++i)
+	{
+		cout << Array[i] << " ";
+	}
+
+	return 0;
+}
+
+
