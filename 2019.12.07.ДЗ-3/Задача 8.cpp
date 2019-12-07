@@ -27,19 +27,19 @@ int kt(int arr[], int l, int r, int k)
     if (k > 0 && k <= r - l + 1) {
 
 
-        int index = part(arr, l, r);
+        int in = part(arr, l, r);
 
-       
-        if (index - l == k - 1)
-            return arr[index];
 
-       
-        if (index - l > k - 1)
-            return kt(arr, l, index - 1, k);
+        if (in - l == k - 1)
+            return arr[in];
 
-        
-        return kt(arr, index + 1, r,
-                           k - index + l - 1);
+
+        if (in - l > k - 1)
+            return kt(arr, l, in - 1, k);
+
+
+        return kt(arr, in + 1, r,
+                           k - in + l - 1);
     }
 
 
