@@ -1,0 +1,80 @@
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+
+using namespace std;
+
+void error(vector<vector<int>>&v, int n, int l, int k)
+{
+    if(n == 0)
+    {
+        for (int j = 0; j < l; ++j) {
+            int a = v[1][j];
+
+            for (int i = 1; i < n; i++) {
+                a = a ^ v[i][j];
+            }
+            for (int i = n + 1; i < k; i++) {
+                a = a ^ v[i][j];
+            }
+
+            v[n][j] = a;
+        }
+
+    }
+    else
+        {
+            for (int j = 0; j < l; ++j) {
+                int a = v[0][j];
+
+                for (int i = 0; i < n; i++) {
+                    a = a ^ v[i][j];
+                }
+                for (int i = n + 1; i < k; i++) {
+                    a = a ^ v[i][j];
+                }
+
+                v[n][j] = a;
+            }
+        }
+
+
+}
+
+
+
+
+int main()
+{
+    int k, n;
+    cin >> k >> n;
+    int l = n * 1024;
+
+    vector<vector<int>> v(k, vector<int>(l));
+    for(int i = 0; i < (k - 1) ; ++i)
+    {
+        for (int j = 0; j < l; ++j)
+        {
+            v[i][j] = 0;
+        }
+    }
+
+    for(int j = 0; j < l; ++j)
+    {
+        int a = v[0][j];
+
+        for(int i = 1; i < (k - 1); i++)
+        {
+            a = a ^ v[i][j];
+        }
+
+        v[k -1][j] = a;
+
+
+    }
+
+// Делаем ошибку и исправляем ее
+error(v, n, l, k);
+
+    return 0;
+}
