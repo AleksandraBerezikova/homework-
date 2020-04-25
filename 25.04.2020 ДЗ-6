@@ -85,8 +85,8 @@ struct least
 void Huffmantree(string text)
 {
     map<char,int>tsymbol;
-    for (char ch: text) {
-        tsymbol[ch]++;
+    for (char symbol: text) {
+        tsymbol[symbol]++;
     }
 
 
